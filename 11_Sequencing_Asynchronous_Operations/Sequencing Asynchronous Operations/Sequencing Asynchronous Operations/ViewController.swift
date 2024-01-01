@@ -370,6 +370,26 @@ final class ViewController: UIViewController {
     }
 }
 
+/// 1. runItAll coordinates the operation of this workflow, starting with checking to see
+///     if one is currently running. If defined, it invokes cancel() on the existing subscriber.
+/// 2. resetAllSteps iterates through all the existing buttons used represent the progress
+///     of this workflow, and resets them to gray and unhighlighted to reflect an initial state.
+///     It also verifies that the activity indicator is not currently animated.
+/// 3. Then we get things started, first with activating the animation on the activity indicator.
+/// 4. Creating the subscriber with sink and storing the reference initiates the workflow.
+///     The publisher to which it is subscribing is setup outside this function,
+///     allowing it to be re-used multiple times. The print operator in the pipeline is for debugging,
+///     showing console output when the pipeline is triggered.
+/// 5. Each step is represented by the invocation of a Future publisher, followed immediately 
+///     by pipeline elements to switch to the main thread and then update a UIButton’s background
+///     to show the step has completed. This is encapsulated in a createFuturePublisher call,
+///     using eraseToAnyPublisher to simplify the type being returned.
+/// 6. The map operator is used to create this specific side effect of updating the a UIButton
+///     to show the step has been completed.
+/// 7. The creation of the overall pipeline and its structure of serial and parallel tasks
+///     is created from the combination of calls to createFuturePublisher using the operators flatMap and zip.
+///     
+
 #if DEBUG
 @available(iOS 13, *)
 struct HomeView_Previews: PreviewProvider {
