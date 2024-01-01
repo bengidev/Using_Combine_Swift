@@ -106,12 +106,24 @@ final class MyViewController : UIViewController {
     
     @objc
     private func didTapAddMoreButton(_ sender: UIButton) -> Void {
-        let texts: [String] = ["LoremIpsum", "TorumDiroth", "LavorumSirotum"]
+        let texts: [String?] = ["LoremIpsum", "TorumDiroth", "LavorumSirotum"]
         
-        let cancellablePipeline = texts
+        let cancellablePipeline = texts // 1
             .publisher
-            .assign(to: \.description, on: loremIpsum)
+            .receive(on: RunLoop.main) // 2
+            .assign(to: \.text, on: valueLabel) // 3
+        
+        cancellablePipeline.cancel() // 4
     }
+    
+    /// 1. .assign is typically chained onto a publisher when you create it, and the return value is cancellable.
+    /// 2. If .assign is being used to update a user interface element, you need to make sure that
+    ///     it is being updated on the main thread. This call makes sure the subscriber is received on the main thread.
+    /// 3. Assign references the property being updated using a key path, and a reference to the object being updated.
+    /// 4. At any time you can cancel to terminate and invalidate pipelines with cancel(). Frequently, you cancel
+    ///     the pipelines when you deactivate the objects (such as a viewController) that are
+    ///     getting updated from the pipeline.
+    ///
     
 }
 // Present the view controller in the Live View window
