@@ -18,21 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        let viewController = HomeViewController()
-        
-        let barAppearance = UINavigationBarAppearance()
-        barAppearance.backgroundColor = .appSecondary
-        barAppearance.shadowColor = .clear
-        
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.navigationBar.standardAppearance = barAppearance
-        navigationController.navigationBar.scrollEdgeAppearance = barAppearance
-        navigationController.navigationBar.compactAppearance = barAppearance
-        navigationController.navigationBar.isTranslucent = true
-        navigationController.navigationBar.prefersLargeTitles = true
-        
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = navigationController
+        window?.rootViewController = HomeViewController()
         window?.makeKeyAndVisible()
     }
     
