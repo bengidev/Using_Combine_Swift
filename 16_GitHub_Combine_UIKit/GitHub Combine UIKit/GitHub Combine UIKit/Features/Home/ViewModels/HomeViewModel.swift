@@ -65,17 +65,17 @@ final class HomeViewModel: NSObject {
             .weakAssign(to: \.githubUserData, on: self)
     }
     
-    func startRepositoriesProcess(action: @escaping (String) -> Void) -> Void {
+    func startRepositoriesProcess(action: @escaping (GithubAPIUser) -> Void) -> Void {
         // using .assign() on the other hand (which returns an
         // AnyCancellable) *DOES* require a Failure type of <Never>
         reposTotalSubscriber = $githubUserData
             .print("github user data: ")
-            .map { userData -> String in
+            .map { userData -> GithubAPIUser in
                 if let firstUser = userData.first {
-                    return String(firstUser.publicRepos)
+                    return firstUser
                 }
                 
-                return "unknown"
+                return GithubAPIUser.empty
             }
             .receive(on: DispatchQueue.main)
             .sink { result in action(result) }
