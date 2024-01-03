@@ -7,5 +7,6 @@ target 'GitHub Combine UIKit' do
 
   # Pods for GitHub Combine UIKit
   pod 'SnapKit', '~> 5.6'
+  pod 'Kingfisher', '~> 7.0'
 
 end
