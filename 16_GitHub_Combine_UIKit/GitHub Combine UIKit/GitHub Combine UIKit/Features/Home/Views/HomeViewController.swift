@@ -73,8 +73,10 @@ final class HomeViewController: UIViewController {
             homeViewModel.username = value.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
             homeViewModel.startUsernameProcess()
             
-            homeViewModel.startApiNetworkProcess { isInProgress in
+            homeViewModel.startApiNetworkProcess { [weak self] isInProgress in
                 print("startApiNetworkProcess: ", isInProgress)
+                
+                self?.homeView.setIsHiddenActivityIndicator(isInProgress)
             }
             
             homeViewModel.startRepositoriesProcess { result in
@@ -85,22 +87,11 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBarPublisher = searchBar.text
-        
-        return true
-    }
-    
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.endEditing(true)
-        searchBarPublisher = searchBar.text
-        
-        return true
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        searchBarPublisher = searchBar.text
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            searchBar.endEditing(true)
+            self?.searchBarPublisher = searchBar.text
+        }
     }
 }
 
