@@ -16,7 +16,7 @@ final class HomeView: UIView {
     // MARK: View Components
     private lazy var containerView: UIView = {
         let vw = AppFactoryView.buildView()
-
+        
         return vw
     }()
     
@@ -30,7 +30,7 @@ final class HomeView: UIView {
         
         return vw
     }()
-
+    
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
         let vw = UIActivityIndicatorView(style: .large)
@@ -44,7 +44,7 @@ final class HomeView: UIView {
     private lazy var oneVStackView: UIStackView = {
         let vw = AppFactoryView.buildStackView()
         vw.axis = .vertical
-
+        
         return vw
     }()
     
@@ -101,11 +101,11 @@ final class HomeView: UIView {
         
         return lb
     }()
-
+    
     private lazy var oneHStackView: UIStackView = {
         let vw = AppFactoryView.buildStackView()
         vw.axis = .horizontal
-
+        
         return vw
     }()
     
@@ -117,7 +117,7 @@ final class HomeView: UIView {
         
         return vw
     }()
-
+    
     private lazy var locationName: UILabel = {
         let lb = AppFactoryView.buildLabel()
         lb.text = "Lorem Ipsum"
@@ -152,7 +152,7 @@ final class HomeView: UIView {
         
         return vw
     }()
-
+    
     private lazy var publicReposLabel: UILabel = {
         let lb = AppFactoryView.buildLabel()
         lb.text = "Public Repos"
@@ -220,6 +220,10 @@ final class HomeView: UIView {
         super.init(frame: frame)
         
         setupViews()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            self?.isHiddenActivityIndicator(true)
+        }
     }
     
     @available (*, unavailable)
@@ -241,13 +245,23 @@ final class HomeView: UIView {
         self.searchTextFieldDelegate = delegate
     }
     
+    func isHiddenActivityIndicator(_ isHidden: Bool) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.blurEffectView.alpha = 0.0
+            self?.activityIndicatorView.alpha = 0.0
+        } completion: { _ in
+            self.blurEffectView.isHidden = true
+            self.activityIndicatorView.isHidden = true
+        }
+    }
+    
     private func setupViews() -> Void {
         backgroundColor = .appSecondary
         
         addSubview(containerView)
         
-        containerView.addSubview(activityIndicatorView)
         containerView.addSubview(blurEffectView)
+        containerView.addSubview(activityIndicatorView)
         containerView.addSubview(oneVStackView)
         containerView.bringSubviewToFront(blurEffectView)
         containerView.bringSubviewToFront(activityIndicatorView)
@@ -255,11 +269,11 @@ final class HomeView: UIView {
             make.edges.equalToSuperview()
         }
         
-        activityIndicatorView.snp.makeConstraints { make in
+        blurEffectView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        blurEffectView.snp.makeConstraints { make in
+        activityIndicatorView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
