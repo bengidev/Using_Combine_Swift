@@ -132,6 +132,8 @@ final class HomeView: UIView {
         vw.layer.cornerRadius = 10.0
         vw.layer.shadowRadius = 5.0
         vw.layer.shadowOpacity = 0.5
+        vw.layer.shouldRasterize = true
+        vw.layer.rasterizationScale = UIScreen.main.scale
         vw.backgroundColor = .systemGray5
         
         return vw
