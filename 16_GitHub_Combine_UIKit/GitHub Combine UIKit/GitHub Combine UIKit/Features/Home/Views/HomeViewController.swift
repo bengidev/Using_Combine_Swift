@@ -76,6 +76,10 @@ final class HomeViewController: UIViewController {
             homeViewModel.startApiNetworkProcess { isInProgress in
                 print("startApiNetworkProcess: ", isInProgress)
             }
+            
+            homeViewModel.startRepositoriesProcess { result in
+                print("startRepositoriesProcess: ", result)
+            }
         }
     }
 }
