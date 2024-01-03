@@ -12,39 +12,29 @@ import UIKit
 final class HomeViewModel: NSObject {
     // Username from the github_id_entry field
     //
-    @Published var username: String = "" {
-        didSet {
-            print("Set username to: ", username)
-        }
-    }
+    @Published private var username: String = ""
     
     // Github user retrieved from the API publisher. As it's updated,
     // it is "wired" to update UI elements
     //
-    @Published private var githubUserData: [GithubAPIUser] = [] {
-        didSet {
-            print("Set githubUserData to: ", githubUserData)
-        }
-    }
+    @Published private var githubAPIUserData: [GithubAPIUser] = []
     
-    private(set) var profileImageSubscriber: AnyCancellable?
-    private(set) var nameSubscriber: AnyCancellable?
-    private(set) var usernameSubscriber: AnyCancellable?
-    private(set) var bioSubscriber: AnyCancellable?
-    private(set) var locationSubscriber: AnyCancellable?
-    private(set) var reposTotalSubscriber: AnyCancellable?
-    private(set) var gistsTotalSubscriber: AnyCancellable?
-    private(set) var sinceSubscriber: AnyCancellable?
-    private(set) var apiNetworkActivitySubscriber: AnyCancellable?
+    private var githubUsernameSubscriber: AnyCancellable?
+    private var githubAPIUserSubscriber: AnyCancellable?
+    private var githubAPIUserImageSubscriber: AnyCancellable?
+    private var networkActivitySubscriber: AnyCancellable?
     
-    func startApiNetworkProcess(action: @escaping (Bool) -> Void) -> Void {
-        apiNetworkActivitySubscriber = GithubAPI.networkActivityPublisher
+    func startNetworkActivityProcess(action: @escaping (Bool) -> Void) -> Void {
+        networkActivitySubscriber = GithubAPI.networkActivityPublisher
             .receive(on: DispatchQueue.main)
             .sink { action($0) }
     }
     
-    func startUsernameProcess() -> Void {
-        usernameSubscriber = $username
+    func startGithubAPIProcess(username usernameInput: String) -> Void {
+        // change publisher username value into usernameInput
+        username = usernameInput
+        
+        githubUsernameSubscriber = $username
             .throttle(for: 0.5, scheduler: DispatchQueue.global(qos: .background), latest: true)
         // ^^ scheduler myBackGroundQueue publishes resulting elements
         // into that queue, resulting on this processing moving off the
@@ -62,13 +52,14 @@ final class HomeViewModel: NSObject {
         // using a sink to get the results from the API search lets us
         // get not only the user, but also any errors attempting to get it.
             .receive(on: DispatchQueue.main)
-            .weakAssign(to: \.githubUserData, on: self)
+            .weakAssign(to: \.githubAPIUserData, on: self)
     }
     
-    func startRepositoriesProcess(action: @escaping (GithubAPIUser) -> Void) -> Void {
+    func startExtractGithubAPIUserProcess(action: @escaping (GithubAPIUser) -> Void) -> Void {
         // using .assign() on the other hand (which returns an
         // AnyCancellable) *DOES* require a Failure type of <Never>
-        reposTotalSubscriber = $githubUserData
+        //
+        githubAPIUserSubscriber = $githubAPIUserData
             .print("github user data: ")
             .map { userData -> GithubAPIUser in
                 if let firstUser = userData.first {
@@ -81,8 +72,8 @@ final class HomeViewModel: NSObject {
             .sink { result in action(result) }
     }
     
-    func startProfileImageProcess(action: @escaping (Bool, UIImage) -> Void) -> Void {
-        profileImageSubscriber = $githubUserData
+    func startExtractProfileImageProcess(action: @escaping (Bool, UIImage?) -> Void) -> Void {
+        githubAPIUserImageSubscriber = $githubAPIUserData
         // When I first wrote this publisher pipeline, the type I was
         // aiming for was <GithubAPIUser?, Never>, where the value was an
         // optional. The commented out .filter below was to prevent a `nil` // GithubAPIUser object from propagating further and attempting to
@@ -108,15 +99,13 @@ final class HomeViewModel: NSObject {
                 // ^^ this hands back (Data, response) objects
                     .handleEvents { subscription in
                         print("profileImageSubscriber subscription: ", subscription)
-                        action(true, .init())
+                        action(true, nil)
                     } receiveOutput: { data, response in
                         print("profileImageSubscriber receiveOutput: ", data)
                     } receiveCompletion: { completion in
                         print("profileImageSubscriber receiveCompletion: ", completion)
-                        action(false, .init())
                     } receiveCancel: {
                         print("profileImageSubscriber receiveCancel: ")
-                        action(false, .init())
                     } receiveRequest: { demand in
                         print("profileImageSubscriber receiveRequest: ", demand.description)
                     }
@@ -147,11 +136,12 @@ final class HomeViewModel: NSObject {
         // ^^ and then switch to receive and process the data on the main
         // queue since we're messing with the UI
             .map { image -> UIImage? in
-                return image }
+                return image
+            }
         // ^^ this converts from the type UIImage to the type UIImage?
         // which is key to making it work correctly with the .assign()
         // operator, which must map the type *exactly*
-            .sink { result in action(false, result ?? .init()) }
+            .sink { result in action(false, result) }
     }
 }
 
