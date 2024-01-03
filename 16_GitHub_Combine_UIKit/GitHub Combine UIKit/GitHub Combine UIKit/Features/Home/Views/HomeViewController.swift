@@ -11,16 +11,8 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     // MARK: Properties
-    private var profileImageValue: AnyCancellable?
-    private var nameValue: AnyCancellable?
-    private var usernameValue: AnyCancellable?
-    private var bioValue: AnyCancellable?
-    private var locationValue: AnyCancellable?
-    private var reposTotalValue: AnyCancellable?
-    private var gistsTotalValue: AnyCancellable?
-    private var sinceValue: AnyCancellable?
-    
-    private let homeView: UIView = HomeView()
+    private let homeViewModel = HomeViewModel()
+    private let homeView = HomeView()
     
     // MARK: Initializers
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -52,23 +44,37 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        
     }
-
+    
     private func setupViews() -> Void {
-        navigationController?.navigationBar.topItem?.title = "GitHub Combine"
+        homeView.setSearchBarDelegate(self)
         
         view = homeView
     }
 }
 
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        print("Search Bar searchBarShouldEndEditing: ", String(describing: searchBar.text))
+        searchBar.endEditing(true)
+        
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("Search Bar searchBarSearchButtonClicked: ", String(describing: searchBar.text))
+        searchBar.endEditing(true)
+    }
+}
+
+
 #if DEBUG
 @available(iOS 13, *)
 struct HomeViewController_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationControllerPreview(barStyle: .largeTitle, showsToolbar: true) {
-            HomeViewController()
-        }
-        .previewLayout(.sizeThatFits)
+        ViewControllerPreview(HomeViewController())
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif
