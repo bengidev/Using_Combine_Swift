@@ -10,9 +10,6 @@ import SwiftUI
 import UIKit
 
 final class HomeView: UIView {
-    // MARK: Properties
-    private var searchTextFieldDelegate: UISearchTextFieldDelegate?
-    
     // MARK: View Components
     private lazy var containerView: UIView = {
         let vw = AppFactoryView.buildView()
@@ -27,6 +24,7 @@ final class HomeView: UIView {
         vw.frame = bounds
         vw.translatesAutoresizingMaskIntoConstraints = false
         vw.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        vw.isHidden = true
         
         return vw
     }()
@@ -36,7 +34,7 @@ final class HomeView: UIView {
         let vw = UIActivityIndicatorView(style: .large)
         vw.translatesAutoresizingMaskIntoConstraints = false
         vw.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        vw.startAnimating()
+        vw.isHidden = true
         
         return vw
     }()
@@ -48,13 +46,12 @@ final class HomeView: UIView {
         return vw
     }()
     
-    private lazy var searchTextField: UISearchTextField = {
-        let tf = UISearchTextField(frame: .zero)
+    private lazy var searchBar: UISearchBar = {
+        let tf = UISearchBar(frame: .zero)
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tf.placeholder = "Enter github username"
-        tf.font = .preferredFont(forTextStyle: .subheadline).italic().monospaced()
-        tf.borderStyle = .roundedRect
+        tf.backgroundImage = .init()
         
         return tf
     }()
@@ -222,10 +219,6 @@ final class HomeView: UIView {
         super.init(frame: frame)
         
         setupViews()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            self?.isHiddenActivityIndicator(true)
-        }
     }
     
     @available (*, unavailable)
@@ -243,17 +236,29 @@ final class HomeView: UIView {
     }
     
     // MARK: Functionalities
-    func setSearchTextFieldDelegate(_ delegate: UISearchTextFieldDelegate) -> Void {
-        self.searchTextFieldDelegate = delegate
+    func setSearchBarDelegate(_ delegate: UISearchBarDelegate) -> Void {
+        self.searchBar.delegate = delegate
     }
     
-    func isHiddenActivityIndicator(_ isHidden: Bool) -> Void {
-        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
-            self?.blurEffectView.alpha = 0.0
-            self?.activityIndicatorView.alpha = 0.0
-        } completion: { _ in
-            self.blurEffectView.isHidden = true
-            self.activityIndicatorView.isHidden = true
+    func setIsHiddenActivityIndicator(_ isHidden: Bool) -> Void {
+        if isHidden {
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+                self?.blurEffectView.alpha = 1.0
+                self?.activityIndicatorView.alpha = 1.0
+                self?.activityIndicatorView.startAnimating()
+            } completion: { _ in
+                self.blurEffectView.isHidden = false
+                self.activityIndicatorView.isHidden = false
+            }
+        } else {
+            UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+                self?.blurEffectView.alpha = 0.0
+                self?.activityIndicatorView.alpha = 0.0
+                self?.activityIndicatorView.stopAnimating()
+            } completion: { _ in
+                self.blurEffectView.isHidden = true
+                self.activityIndicatorView.isHidden = true
+            }
         }
     }
     
@@ -279,10 +284,10 @@ final class HomeView: UIView {
             make.edges.equalToSuperview()
         }
         
-        oneVStackView.addArrangedSubview(searchTextField)
+        oneVStackView.addArrangedSubview(searchBar)
         oneVStackView.addArrangedSubview(profileImageView)
         oneVStackView.addArrangedSubview(twoVStackView)
-        oneVStackView.setCustomSpacing(UIScreen.height * 0.01, after: searchTextField)
+        oneVStackView.setCustomSpacing(UIScreen.height * 0.01, after: searchBar)
         oneVStackView.setCustomSpacing(UIScreen.height * 0.03, after: profileImageView)
         oneVStackView.setCustomSpacing(UIScreen.height * 0.05, after: twoVStackView)
         oneVStackView.addArrangedSubview(containerDetailView)
@@ -290,7 +295,7 @@ final class HomeView: UIView {
             make.center.equalToSuperview()
         }
 
-        searchTextField.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.height.equalTo(UIScreen.height * 0.05)
             make.horizontalEdges.equalToSuperview()
         }
