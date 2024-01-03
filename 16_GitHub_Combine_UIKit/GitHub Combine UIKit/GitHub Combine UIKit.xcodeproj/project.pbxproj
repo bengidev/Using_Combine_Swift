@@ -26,6 +26,7 @@
 		B68CF12A2B44EC4B00B79FA5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF1272B44EC4B00B79FA5 /* UIViewController+Extension.swift */; };
 		B68CF12B2B44EC4B00B79FA5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF1282B44EC4B00B79FA5 /* UIFont+Extension.swift */; };
 		B6C197662B455409002D15D3 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C197652B455409002D15D3 /* UIScreen+Extension.swift */; };
+		B6C197682B4563D1002D15D3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C197672B4563D1002D15D3 /* HomeViewModel.swift */; };
 		BC420A2EDFE613C801A97B95 /* Pods_GitHub_Combine_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E826E90BE9561CD5124B65D8 /* Pods_GitHub_Combine_UIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		B68CF1272B44EC4B00B79FA5 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B68CF1282B44EC4B00B79FA5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		B6C197652B455409002D15D3 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScreen+Extension.swift"; path = "../../../../../../../.Trash/UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		B6C197672B4563D1002D15D3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E826E90BE9561CD5124B65D8 /* Pods_GitHub_Combine_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_Combine_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -178,6 +180,7 @@
 		B68CF11C2B44DDA700B79FA5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				B6C197672B4563D1002D15D3 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B68CF10D2B44CB7000B79FA5 /* HomeView.swift in Sources */,
+				B6C197682B4563D1002D15D3 /* HomeViewModel.swift in Sources */,
 				B68CF0F82B44C9E000B79FA5 /* HomeViewController.swift in Sources */,
 				B61835572B453C7300154CF0 /* Publisher+Extension.swift in Sources */,
 				B68CF1252B44EBDA00B79FA5 /* AppFactoryView.swift in Sources */,
