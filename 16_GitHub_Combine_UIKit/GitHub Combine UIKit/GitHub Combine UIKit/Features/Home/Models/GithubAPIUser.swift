@@ -18,7 +18,7 @@ struct GithubAPIUser: Identifiable, Codable {
     let bio: String
     let publicRepos: Int
     let publicGists: Int
-    let since: Int
+    let since: String
     let avatarURL: String
     let location: String
     
