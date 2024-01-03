@@ -62,6 +62,8 @@ final class GithubAPI: NSObject {
                 print("Publisher Request: ", demand.description)
             }
             .tryMap { data, response -> Data in
+                Thread.sleep(forTimeInterval: 3.0)
+                
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw APIFailureCondition.invalidServerResponse
@@ -70,10 +72,7 @@ final class GithubAPI: NSObject {
                 return data
             }
             .decode(type: GithubAPIUser.self, decoder: JSONDecoder())
-            .map { user -> [GithubAPIUser] in
-                Thread.sleep(forTimeInterval: 3.0)
-                return [user]
-            }
+            .map { [$0] }
             .replaceError(with: [])
         // ^^ when I originally wrote this method, I was returning
         // a GithubAPIUser? optional, and then a GithubAPIUser without
