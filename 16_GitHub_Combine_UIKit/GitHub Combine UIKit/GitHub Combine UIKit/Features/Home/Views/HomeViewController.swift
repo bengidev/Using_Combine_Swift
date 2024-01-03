@@ -70,17 +70,21 @@ final class HomeViewController: UIViewController {
     
     private func didTapSearchBar(_ value: String) -> Void {
         if !value.isEmpty {
-            homeViewModel.username = value.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-            homeViewModel.startUsernameProcess()
+            let searchValue = value.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            homeViewModel.startGithubAPIProcess(username: searchValue)
             
-            homeViewModel.startApiNetworkProcess { [weak self] isInProgress in
+            homeViewModel.startNetworkActivityProcess { [weak self] isInProgress in
                 print("startApiNetworkProcess: ", isInProgress)
                 
                 self?.homeView.setIsHiddenActivityIndicator(isInProgress)
             }
             
-            homeViewModel.startRepositoriesProcess { result in
-                print("startRepositoriesProcess: ", result)
+            homeViewModel.startExtractGithubAPIUserProcess { user in
+                print("startExtractGithubAPIUserProcess: ", user)
+            }
+            
+            homeViewModel.startExtractProfileImageProcess { isInProgress, image in
+                print("startExtractProfileImageProcess: ", isInProgress, String(describing: image))
             }
         }
     }
@@ -88,13 +92,10 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
-            searchBar.endEditing(true)
-            self?.searchBarPublisher = searchBar.text
-        }
+        searchBar.endEditing(true)
+        searchBarPublisher = searchBar.text
     }
 }
-
 
 #if DEBUG
 @available(iOS 13, *)
