@@ -70,7 +70,10 @@ final class GithubAPI: NSObject {
                 return data
             }
             .decode(type: GithubAPIUser.self, decoder: JSONDecoder())
-            .map { [$0] }
+            .map { user -> [GithubAPIUser] in
+                Thread.sleep(forTimeInterval: 3.0)
+                return [user]
+            }
             .replaceError(with: [])
         // ^^ when I originally wrote this method, I was returning
         // a GithubAPIUser? optional, and then a GithubAPIUser without
