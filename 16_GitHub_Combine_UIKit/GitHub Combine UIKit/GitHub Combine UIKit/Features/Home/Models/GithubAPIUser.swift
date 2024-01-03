@@ -22,6 +22,17 @@ struct GithubAPIUser: Identifiable, Codable {
     let avatarURL: String
     let location: String
     
+    static let empty: GithubAPIUser = .init(
+        name: "",
+        login: "",
+        bio: "",
+        publicRepos: 0,
+        publicGists: 0,
+        since: "",
+        avatarURL: "",
+        location: ""
+    )
+    
     enum CodingKeys: String, CodingKey {
         case name
         case login
