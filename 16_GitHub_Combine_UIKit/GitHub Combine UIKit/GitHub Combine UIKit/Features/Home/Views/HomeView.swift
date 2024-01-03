@@ -10,9 +10,33 @@ import SwiftUI
 import UIKit
 
 final class HomeView: UIView {
+    // MARK: Properties
+    private var searchTextFieldDelegate: UISearchTextFieldDelegate?
+    
     // MARK: View Components
     private lazy var containerView: UIView = {
         let vw = AppFactoryView.buildView()
+
+        return vw
+    }()
+    
+    private lazy var blurEffectView: UIView = {
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        
+        let vw = UIVisualEffectView(effect: blurEffect)
+        vw.frame = bounds
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        vw.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        return vw
+    }()
+
+    
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let vw = UIActivityIndicatorView(style: .large)
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        vw.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        vw.startAnimating()
         
         return vw
     }()
@@ -22,6 +46,17 @@ final class HomeView: UIView {
         vw.axis = .vertical
 
         return vw
+    }()
+    
+    private lazy var searchTextField: UISearchTextField = {
+        let tf = UISearchTextField(frame: .zero)
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tf.placeholder = "Enter github username"
+        tf.font = .preferredFont(forTextStyle: .subheadline).italic().monospaced()
+        tf.borderStyle = .roundedRect
+        
+        return tf
     }()
     
     private lazy var profileImageView: UIImageView = {
@@ -201,23 +236,47 @@ final class HomeView: UIView {
         fatalError("awakeFromNib() has not been implemented")
     }
     
+    // MARK: Functionalities
+    func setSearchTextFieldDelegate(_ delegate: UISearchTextFieldDelegate) -> Void {
+        self.searchTextFieldDelegate = delegate
+    }
+    
     private func setupViews() -> Void {
         backgroundColor = .appSecondary
         
         addSubview(containerView)
         
+        containerView.addSubview(activityIndicatorView)
+        containerView.addSubview(blurEffectView)
         containerView.addSubview(oneVStackView)
+        containerView.bringSubviewToFront(blurEffectView)
+        containerView.bringSubviewToFront(activityIndicatorView)
         containerView.snp.makeConstraints { make in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
+        activityIndicatorView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        blurEffectView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        oneVStackView.addArrangedSubview(searchTextField)
         oneVStackView.addArrangedSubview(profileImageView)
-        oneVStackView.setCustomSpacing(UIScreen.height * 0.03, after: profileImageView)
         oneVStackView.addArrangedSubview(twoVStackView)
+        oneVStackView.setCustomSpacing(UIScreen.height * 0.01, after: searchTextField)
+        oneVStackView.setCustomSpacing(UIScreen.height * 0.03, after: profileImageView)
         oneVStackView.setCustomSpacing(UIScreen.height * 0.05, after: twoVStackView)
         oneVStackView.addArrangedSubview(containerDetailView)
         oneVStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
+        }
+
+        searchTextField.snp.makeConstraints { make in
+            make.height.equalTo(UIScreen.height * 0.05)
+            make.horizontalEdges.equalToSuperview()
         }
         
         profileImageView.snp.makeConstraints { make in
