@@ -69,20 +69,25 @@ final class HomeViewController: UIViewController {
     }
     
     private func didTapSearchBar(_ value: String) -> Void {
-        print("didTapSearchBar: ", value)
+        if !value.isEmpty {
+            homeViewModel.username = value.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            homeViewModel.startUsernameProcess()
+            
+            homeViewModel.startApiNetworkProcess { isInProgress in
+                print("startApiNetworkProcess: ", isInProgress)
+            }
+        }
     }
 }
 
 extension HomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        print("Search Bar searchBarShouldBeginEditing: ")
         searchBarPublisher = searchBar.text
         
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        print("Search Bar searchBarShouldEndEditing: ", String(describing: searchBar.text))
         searchBar.endEditing(true)
         searchBarPublisher = searchBar.text
         
@@ -90,7 +95,6 @@ extension HomeViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Search Bar searchBarSearchButtonClicked: ", String(describing: searchBar.text))
         searchBar.endEditing(true)
         searchBarPublisher = searchBar.text
     }
