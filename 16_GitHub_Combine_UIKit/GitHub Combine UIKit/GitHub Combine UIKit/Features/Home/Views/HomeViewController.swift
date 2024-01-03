@@ -11,6 +11,9 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     // MARK: Properties
+    @Published private var searchBarPublisher: String?
+    private var searchBarSubscriber: AnyCancellable?
+    
     private let homeViewModel = HomeViewModel()
     private let homeView = HomeView()
     
@@ -44,7 +47,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
+        setupSearchBarSubscriber()
     }
     
     private func setupViews() -> Void {
@@ -52,12 +55,36 @@ final class HomeViewController: UIViewController {
         
         view = homeView
     }
+    
+    private func setupSearchBarSubscriber() -> Void {
+        searchBarSubscriber = $searchBarPublisher
+            .receive(on: DispatchQueue.main)
+            .map { result -> String in
+                guard let result else { return "" }
+                return result
+            }
+            .sink { [weak self] result in
+                self?.didTapSearchBar(result)
+            }
+    }
+    
+    private func didTapSearchBar(_ value: String) -> Void {
+        print("didTapSearchBar: ", value)
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        print("Search Bar searchBarShouldBeginEditing: ")
+        searchBarPublisher = searchBar.text
+        
+        return true
+    }
+    
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         print("Search Bar searchBarShouldEndEditing: ", String(describing: searchBar.text))
         searchBar.endEditing(true)
+        searchBarPublisher = searchBar.text
         
         return true
     }
@@ -65,6 +92,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search Bar searchBarSearchButtonClicked: ", String(describing: searchBar.text))
         searchBar.endEditing(true)
+        searchBarPublisher = searchBar.text
     }
 }
 
