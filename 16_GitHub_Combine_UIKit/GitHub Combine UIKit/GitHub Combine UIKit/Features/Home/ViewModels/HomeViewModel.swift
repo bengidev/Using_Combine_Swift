@@ -43,7 +43,7 @@ final class HomeViewModel: NSObject {
             .sink { action($0) }
     }
     
-    func startUsernameProgress() -> Void {
+    func startUsernameProcess() -> Void {
         usernameSubscriber = $username
             .throttle(for: 0.5, scheduler: DispatchQueue.global(qos: .background), latest: true)
         // ^^ scheduler myBackGroundQueue publishes resulting elements
