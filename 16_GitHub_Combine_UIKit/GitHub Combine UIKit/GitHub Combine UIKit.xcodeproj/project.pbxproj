@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B61835572B453C7300154CF0 /* Publisher+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61835562B453C7300154CF0 /* Publisher+Extension.swift */; };
+		B63158822B461F98001C4B87 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63158812B461F98001C4B87 /* UIScreen+Extension.swift */; };
 		B68CF0F42B44C9E000B79FA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF0F32B44C9E000B79FA5 /* AppDelegate.swift */; };
 		B68CF0F62B44C9E000B79FA5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF0F52B44C9E000B79FA5 /* SceneDelegate.swift */; };
 		B68CF0F82B44C9E000B79FA5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF0F72B44C9E000B79FA5 /* HomeViewController.swift */; };
@@ -25,7 +26,6 @@
 		B68CF1252B44EBDA00B79FA5 /* AppFactoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF1242B44EBDA00B79FA5 /* AppFactoryView.swift */; };
 		B68CF12A2B44EC4B00B79FA5 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF1272B44EC4B00B79FA5 /* UIViewController+Extension.swift */; };
 		B68CF12B2B44EC4B00B79FA5 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CF1282B44EC4B00B79FA5 /* UIFont+Extension.swift */; };
-		B6C197662B455409002D15D3 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C197652B455409002D15D3 /* UIScreen+Extension.swift */; };
 		B6C197682B4563D1002D15D3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C197672B4563D1002D15D3 /* HomeViewModel.swift */; };
 		BC420A2EDFE613C801A97B95 /* Pods_GitHub_Combine_UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E826E90BE9561CD5124B65D8 /* Pods_GitHub_Combine_UIKit.framework */; };
 /* End PBXBuildFile section */
@@ -34,6 +34,7 @@
 		66CB3869C5AAF58FDB0EEB54 /* Pods-GitHub Combine UIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub Combine UIKit.release.xcconfig"; path = "Target Support Files/Pods-GitHub Combine UIKit/Pods-GitHub Combine UIKit.release.xcconfig"; sourceTree = "<group>"; };
 		B4FF0F3347A04E68E59146B0 /* Pods-GitHub Combine UIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub Combine UIKit.debug.xcconfig"; path = "Target Support Files/Pods-GitHub Combine UIKit/Pods-GitHub Combine UIKit.debug.xcconfig"; sourceTree = "<group>"; };
 		B61835562B453C7300154CF0 /* Publisher+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extension.swift"; sourceTree = "<group>"; };
+		B63158812B461F98001C4B87 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		B68CF0F02B44C9E000B79FA5 /* GitHub Combine UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Combine UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B68CF0F32B44C9E000B79FA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B68CF0F52B44C9E000B79FA5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		B68CF1242B44EBDA00B79FA5 /* AppFactoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactoryView.swift; sourceTree = "<group>"; };
 		B68CF1272B44EC4B00B79FA5 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B68CF1282B44EC4B00B79FA5 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		B6C197652B455409002D15D3 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIScreen+Extension.swift"; path = "../../../../../../../.Trash/UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		B6C197672B4563D1002D15D3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E826E90BE9561CD5124B65D8 /* Pods_GitHub_Combine_UIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_Combine_UIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,10 +212,10 @@
 		B68CF1262B44EC3400B79FA5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B6C197652B455409002D15D3 /* UIScreen+Extension.swift */,
 				B68CF1282B44EC4B00B79FA5 /* UIFont+Extension.swift */,
 				B68CF1272B44EC4B00B79FA5 /* UIViewController+Extension.swift */,
 				B61835562B453C7300154CF0 /* Publisher+Extension.swift */,
+				B63158812B461F98001C4B87 /* UIScreen+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -348,9 +348,9 @@
 				B68CF0F82B44C9E000B79FA5 /* HomeViewController.swift in Sources */,
 				B61835572B453C7300154CF0 /* Publisher+Extension.swift in Sources */,
 				B68CF1252B44EBDA00B79FA5 /* AppFactoryView.swift in Sources */,
+				B63158822B461F98001C4B87 /* UIScreen+Extension.swift in Sources */,
 				B68CF12B2B44EC4B00B79FA5 /* UIFont+Extension.swift in Sources */,
 				B68CF1182B44CFF600B79FA5 /* TabBarControllerPreview.swift in Sources */,
-				B6C197662B455409002D15D3 /* UIScreen+Extension.swift in Sources */,
 				B68CF12A2B44EC4B00B79FA5 /* UIViewController+Extension.swift in Sources */,
 				B68CF11B2B44CFF600B79FA5 /* PreviewTabBarItem.swift in Sources */,
 				B68CF0F42B44C9E000B79FA5 /* AppDelegate.swift in Sources */,

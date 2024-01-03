@@ -1,8 +1,8 @@
 //
 //  UIScreen+Extension.swift
-//  Alpha Todo
+//  GitHub Combine UIKit
 //
-//  Created by Bambang Tri Rahmat Doni on 27/12/23.
+//  Created by Bambang Tri Rahmat Doni on 04/01/24.
 //
 
 import UIKit
