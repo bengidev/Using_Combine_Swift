@@ -5,6 +5,7 @@
 //  Created by Bambang Tri Rahmat Doni on 03/01/24.
 //
 
+import Kingfisher
 import SnapKit
 import SwiftUI
 import UIKit
@@ -160,7 +161,7 @@ final class HomeView: UIView {
         return lb
     }()
     
-    private lazy var reposValueLabel: UIView = {
+    private lazy var reposValueLabel: UILabel = {
         let lb = AppFactoryView.buildLabel()
         lb.text = "50"
         lb.font = .preferredFont(forTextStyle: .subheadline).italic()
@@ -183,7 +184,7 @@ final class HomeView: UIView {
         return lb
     }()
     
-    private lazy var gistsValueLabel: UIView = {
+    private lazy var gistsValueLabel: UILabel = {
         let lb = AppFactoryView.buildLabel()
         lb.text = "100"
         lb.font = .preferredFont(forTextStyle: .subheadline).italic()
@@ -206,7 +207,7 @@ final class HomeView: UIView {
         return lb
     }()
     
-    private lazy var sinceValueLabel: UIView = {
+    private lazy var sinceValueLabel: UILabel = {
         let lb = AppFactoryView.buildLabel()
         lb.text = "1974"
         lb.font = .preferredFont(forTextStyle: .subheadline).italic()
@@ -259,6 +260,74 @@ final class HomeView: UIView {
                 self.blurEffectView.isHidden = true
                 self.activityIndicatorView.isHidden = true
             }
+        }
+    }
+    
+    func setProfileImage(with imageURL: URL) -> Void {
+        let processor = DownsamplingImageProcessor(
+            size: .init(
+                width: UIScreen.width / 2,
+                height: UIScreen.height / 2
+            )
+        ) |> RoundCornerImageProcessor(
+            cornerRadius: 10.0
+        )
+        
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: imageURL, placeholder: UIImage(resource: .WWDC), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1.0)),
+            .cacheOriginalImage
+        ]) { result in
+            switch result {
+            case .success(let value):
+                print("profileImageView success: ", value.image)
+            case .failure(let error):
+                print("profileImageView error: ", error.localizedDescription)
+            }
+        }
+    }
+    
+    func setProfileName(with name: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.profileName.text = name
+        }
+    }
+    
+    func setProfileUsername(with name: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.profileUsername.text = name
+        }
+    }
+    
+    func setProfileBio(with bio: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.profileBio.text = bio
+        }
+    }
+    
+    func setProfileLocation(with location: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.locationName.text = location
+        }
+    }
+    
+    func setPublicRepos(with total: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.reposValueLabel.text = total
+        }
+    }
+    
+    func setPublicGists(with total: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.gistsValueLabel.text = total
+        }
+    }
+    
+    func setContributeSince(with since: String) -> Void {
+        UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseInOut) { [weak self] in
+            self?.sinceValueLabel.text = since
         }
     }
     
