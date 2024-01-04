@@ -82,3 +82,22 @@ NotificationCenter.default.post(
     object: exampleViewModel,
     userInfo: ["testerKey": "testerValue"]
 )
+
+
+
+NotificationCenter.default.publisher(
+    for: .newExampleNotification,
+    object: nil
+)
+.sink { receivedNotification in
+    print("passed through: ", receivedNotification)
+    
+    // receivedNotification.name
+    // receivedNotification.object - object sending the notification (sometimes nil)
+    // receivedNotification.userInfo - often nil
+}
+
+NotificationCenter.default.post(
+    name: .newExampleNotification,
+    object: "testerValue"
+)
