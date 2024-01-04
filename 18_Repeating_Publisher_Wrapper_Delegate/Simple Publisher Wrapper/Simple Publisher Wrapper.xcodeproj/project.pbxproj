@@ -18,6 +18,9 @@
 		B6DAF7322B46B93300BD072D /* ViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF72C2B46B93300BD072D /* ViewControllerPreview.swift */; };
 		B6DAF7332B46B93300BD072D /* NavigationControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF72D2B46B93300BD072D /* NavigationControllerPreview.swift */; };
 		B6DAF7342B46B93300BD072D /* PreviewTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF72E2B46B93300BD072D /* PreviewTabBarItem.swift */; };
+		B6DAF7362B46B9EA00BD072D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF7352B46B9EA00BD072D /* HomeView.swift */; };
+		B6DAF7392B46BC6D00BD072D /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF7382B46BC6D00BD072D /* UIButton+Extensions.swift */; };
+		B6DAF73C2B46C30500BD072D /* LocationHeadingProxyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF73B2B46C30500BD072D /* LocationHeadingProxyManager.swift */; };
 		EA14A07203713D99B45428BB /* Pods_Simple_Publisher_Wrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AB4FFCC8DA1851287FFEB8 /* Pods_Simple_Publisher_Wrapper.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +41,9 @@
 		B6DAF72C2B46B93300BD072D /* ViewControllerPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPreview.swift; sourceTree = "<group>"; };
 		B6DAF72D2B46B93300BD072D /* NavigationControllerPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerPreview.swift; sourceTree = "<group>"; };
 		B6DAF72E2B46B93300BD072D /* PreviewTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTabBarItem.swift; sourceTree = "<group>"; };
+		B6DAF7352B46B9EA00BD072D /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B6DAF7382B46BC6D00BD072D /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		B6DAF73B2B46C30500BD072D /* LocationHeadingProxyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeadingProxyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +88,11 @@
 		B6DAF70D2B46B33900BD072D /* Simple Publisher Wrapper */ = {
 			isa = PBXGroup;
 			children = (
+				B6DAF73A2B46C2EE00BD072D /* Managers */,
 				B6DAF7222B46B3AE00BD072D /* Application */,
 				B6DAF7242B46B3E100BD072D /* Features */,
 				B6DAF7232B46B3B800BD072D /* Resources */,
+				B6DAF7372B46BC5D00BD072D /* Extensions */,
 				B6DAF7292B46B93300BD072D /* PreviewView */,
 				B6DAF7272B46B93300BD072D /* PreviewViewLegacyOSCompileFix */,
 			);
@@ -130,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				B6DAF7122B46B33900BD072D /* HomeViewController.swift */,
+				B6DAF7352B46B9EA00BD072D /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +161,22 @@
 				B6DAF72E2B46B93300BD072D /* PreviewTabBarItem.swift */,
 			);
 			path = PreviewView;
+			sourceTree = "<group>";
+		};
+		B6DAF7372B46BC5D00BD072D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAF7382B46BC6D00BD072D /* UIButton+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B6DAF73A2B46C2EE00BD072D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAF73B2B46C30500BD072D /* LocationHeadingProxyManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		DB4ECBD188E68270661DF3ED /* Frameworks */ = {
@@ -278,12 +303,15 @@
 			files = (
 				B6DAF7342B46B93300BD072D /* PreviewTabBarItem.swift in Sources */,
 				B6DAF7322B46B93300BD072D /* ViewControllerPreview.swift in Sources */,
+				B6DAF73C2B46C30500BD072D /* LocationHeadingProxyManager.swift in Sources */,
 				B6DAF72F2B46B93300BD072D /* DesignTime+BackDeploy.swift in Sources */,
+				B6DAF7362B46B9EA00BD072D /* HomeView.swift in Sources */,
 				B6DAF7132B46B33900BD072D /* HomeViewController.swift in Sources */,
 				B6DAF7312B46B93300BD072D /* TabBarControllerPreview.swift in Sources */,
 				B6DAF70F2B46B33900BD072D /* AppDelegate.swift in Sources */,
 				B6DAF7112B46B33900BD072D /* SceneDelegate.swift in Sources */,
 				B6DAF7332B46B93300BD072D /* NavigationControllerPreview.swift in Sources */,
+				B6DAF7392B46BC6D00BD072D /* UIButton+Extensions.swift in Sources */,
 				B6DAF7302B46B93300BD072D /* ViewPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +461,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Simple Publisher Wrapper/Resources/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Always allow this app to save your current locations?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow this app to save your current locations?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -466,6 +496,8 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Simple Publisher Wrapper/Resources/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Always allow this app to save your current locations?";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow this app to save your current locations?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
