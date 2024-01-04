@@ -12,9 +12,13 @@
 		B6DAF7132B46B33900BD072D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF7122B46B33900BD072D /* HomeViewController.swift */; };
 		B6DAF7182B46B33D00BD072D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DAF7172B46B33D00BD072D /* Assets.xcassets */; };
 		B6DAF71B2B46B33D00BD072D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DAF7192B46B33D00BD072D /* LaunchScreen.storyboard */; };
+		EA14A07203713D99B45428BB /* Pods_Simple_Publisher_Wrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35AB4FFCC8DA1851287FFEB8 /* Pods_Simple_Publisher_Wrapper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35AB4FFCC8DA1851287FFEB8 /* Pods_Simple_Publisher_Wrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Simple_Publisher_Wrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		771A06AE69CD31DE4844EAE3 /* Pods-Simple Publisher Wrapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple Publisher Wrapper.debug.xcconfig"; path = "Target Support Files/Pods-Simple Publisher Wrapper/Pods-Simple Publisher Wrapper.debug.xcconfig"; sourceTree = "<group>"; };
+		9AD89449D9EB5D6159E11BFC /* Pods-Simple Publisher Wrapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Simple Publisher Wrapper.release.xcconfig"; path = "Target Support Files/Pods-Simple Publisher Wrapper/Pods-Simple Publisher Wrapper.release.xcconfig"; sourceTree = "<group>"; };
 		B6DAF70B2B46B33900BD072D /* Simple Publisher Wrapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simple Publisher Wrapper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DAF70E2B46B33900BD072D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DAF7102B46B33900BD072D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,17 +33,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA14A07203713D99B45428BB /* Pods_Simple_Publisher_Wrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31EBDB6C3E64FDA1591275C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				771A06AE69CD31DE4844EAE3 /* Pods-Simple Publisher Wrapper.debug.xcconfig */,
+				9AD89449D9EB5D6159E11BFC /* Pods-Simple Publisher Wrapper.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B6DAF7022B46B33900BD072D = {
 			isa = PBXGroup;
 			children = (
 				B6DAF70D2B46B33900BD072D /* Simple Publisher Wrapper */,
 				B6DAF70C2B46B33900BD072D /* Products */,
+				31EBDB6C3E64FDA1591275C6 /* Pods */,
+				DB4ECBD188E68270661DF3ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +121,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DB4ECBD188E68270661DF3ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35AB4FFCC8DA1851287FFEB8 /* Pods_Simple_Publisher_Wrapper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -111,9 +136,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6DAF71F2B46B33E00BD072D /* Build configuration list for PBXNativeTarget "Simple Publisher Wrapper" */;
 			buildPhases = (
+				79CCF74B3C9A204D4C748D2F /* [CP] Check Pods Manifest.lock */,
 				B6DAF7072B46B33900BD072D /* Sources */,
 				B6DAF7082B46B33900BD072D /* Frameworks */,
 				B6DAF7092B46B33900BD072D /* Resources */,
+				BD60038252B5C385B62E0BC3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,6 +195,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79CCF74B3C9A204D4C748D2F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Simple Publisher Wrapper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD60038252B5C385B62E0BC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Simple Publisher Wrapper/Pods-Simple Publisher Wrapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Simple Publisher Wrapper/Pods-Simple Publisher Wrapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Simple Publisher Wrapper/Pods-Simple Publisher Wrapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B6DAF7072B46B33900BD072D /* Sources */ = {
@@ -315,6 +384,7 @@
 		};
 		B6DAF7202B46B33E00BD072D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 771A06AE69CD31DE4844EAE3 /* Pods-Simple Publisher Wrapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -347,6 +417,7 @@
 		};
 		B6DAF7212B46B33E00BD072D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AD89449D9EB5D6159E11BFC /* Pods-Simple Publisher Wrapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

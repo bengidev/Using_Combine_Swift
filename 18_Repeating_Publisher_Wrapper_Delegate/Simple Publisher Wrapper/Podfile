@@ -1,0 +1,11 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Simple Publisher Wrapper' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Simple Publisher Wrapper
+  pod 'SnapKit', '~> 5.6'
+
+end
