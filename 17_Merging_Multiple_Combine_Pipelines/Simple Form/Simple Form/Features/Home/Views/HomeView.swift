@@ -11,6 +11,9 @@ import UIKit
 
 final class HomeView: UIView {
     // MARK: Properties
+    private var oneTextFieldHandler: ((String?) -> Void)?
+    private var twoTextFieldHandler: ((String?) -> Void)?
+    private var twoMirrorTextFieldHandler: ((String?) -> Void)?
     private var oneButtonHandler: (() -> Void)?
     
     // MARK: ViewComponents
@@ -47,6 +50,7 @@ final class HomeView: UIView {
         tf.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tf.placeholder = "Enter first value"
         tf.borderStyle = .roundedRect
+        tf.addTarget(self, action: #selector(didChangeOneTextField(_:)), for: .editingChanged)
         
         return tf
     }()
@@ -57,6 +61,7 @@ final class HomeView: UIView {
         tf.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tf.placeholder = "Enter second value"
         tf.borderStyle = .roundedRect
+        tf.addTarget(self, action: #selector(didChangeTwoTextField(_:)), for: .editingChanged)
         
         return tf
     }()
@@ -67,6 +72,7 @@ final class HomeView: UIView {
         tf.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tf.placeholder = "Enter second value"
         tf.borderStyle = .roundedRect
+        tf.addTarget(self, action: #selector(didChangeTwoMirrorTextField(_:)), for: .editingChanged)
         
         return tf
     }()
@@ -131,16 +137,16 @@ final class HomeView: UIView {
     }
     
     // MARK: Functionalities
-    func setOneTextFieldDelegate(with delegate: UITextFieldDelegate) -> Void {
-        oneTextField.delegate = delegate
+    func setOneTextFieldHandler(action: @escaping (String?) -> Void) -> Void {
+        oneTextFieldHandler = action
     }
     
-    func setTwoTextFieldDelegate(with delegate: UITextFieldDelegate) -> Void {
-        twoTextField.delegate = delegate
+    func setTwoTextFieldHandler(action: @escaping (String?) -> Void) -> Void {
+        twoTextFieldHandler = action
     }
     
-    func setTwoMirrorTextFieldDelegate(with delegate: UITextFieldDelegate) -> Void {
-        twoMirrorTextField.delegate = delegate
+    func setTwoMirrorTextFieldHandler(action: @escaping (String?) -> Void) -> Void {
+        twoMirrorTextFieldHandler = action
     }
     
     func setOneLabelText(with text: String) -> Void {
@@ -204,6 +210,21 @@ final class HomeView: UIView {
             make.width.equalTo(UIScreen.main.bounds.width * 0.4)
             make.height.equalTo(44.0)
         }
+    }
+    
+    @objc
+    private func didChangeOneTextField(_ sender: UITextField) -> Void {
+        oneTextFieldHandler?(sender.text)
+    }
+    
+    @objc
+    private func didChangeTwoTextField(_ sender: UITextField) -> Void {
+        twoTextFieldHandler?(sender.text)
+    }
+    
+    @objc
+    private func didChangeTwoMirrorTextField(_ sender: UITextField) -> Void {
+        twoMirrorTextFieldHandler?(sender.text)
     }
     
     @objc
