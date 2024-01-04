@@ -82,7 +82,8 @@ final class HomeView: UIView {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         lb.text = "First value"
-        lb.font = .preferredFont(forTextStyle: .title2)
+        lb.font = .preferredFont(forTextStyle: .subheadline)
+        lb.numberOfLines = 0
         
         return lb
     }()
@@ -92,7 +93,8 @@ final class HomeView: UIView {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         lb.text = "Second value"
-        lb.font = .preferredFont(forTextStyle: .title2)
+        lb.font = .preferredFont(forTextStyle: .subheadline)
+        lb.numberOfLines = 0
         
         return lb
     }()
@@ -101,7 +103,7 @@ final class HomeView: UIView {
         let bt = UIButton(type: .roundedRect)
         bt.translatesAutoresizingMaskIntoConstraints = false
         bt.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        bt.setTitle("Verify", for: .normal)
+        bt.setTitle("Start", for: .normal)
         bt.setImage(.init(systemName: "checkmark"), for: .normal)
         bt.setPreferredSymbolConfiguration(.init(font: .preferredFont(forTextStyle: .headline)), forImageIn: .normal)
         bt.backgroundColor = .systemGray5
@@ -161,6 +163,12 @@ final class HomeView: UIView {
         }
     }
     
+    func isEnabledOneButton(_ isEnabled: Bool) -> Void {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.oneButton.isEnabled = isEnabled
+        }
+    }
+    
     func setOneButtonHandler(action: @escaping () -> Void) -> Void {
         oneButtonHandler = action
     }
@@ -177,13 +185,13 @@ final class HomeView: UIView {
         }
         
         oneVStackView.addArrangedSubview(oneTextField)
-        oneVStackView.setCustomSpacing(30.0, after: oneTextField)
+        oneVStackView.setCustomSpacing(10.0, after: oneTextField)
+        oneVStackView.addArrangedSubview(oneLabel)
+        oneVStackView.setCustomSpacing(40.0, after: oneLabel)
         oneVStackView.addArrangedSubview(twoTextField)
         oneVStackView.setCustomSpacing(10.0, after: twoTextField)
         oneVStackView.addArrangedSubview(twoMirrorTextField)
-        oneVStackView.setCustomSpacing(50.0, after: twoMirrorTextField)
-        oneVStackView.addArrangedSubview(oneLabel)
-        oneVStackView.setCustomSpacing(20.0, after: oneLabel)
+        oneVStackView.setCustomSpacing(10.0, after: twoMirrorTextField)
         oneVStackView.addArrangedSubview(twoLabel)
         oneVStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -202,6 +210,14 @@ final class HomeView: UIView {
         twoMirrorTextField.snp.makeConstraints { make in
             make.width.equalTo(UIScreen.main.bounds.width * 0.8)
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
+        }
+        
+        oneLabel.snp.makeConstraints { make in
+            make.width.equalTo(UIScreen.main.bounds.width * 0.8)
+        }
+        
+        twoLabel.snp.makeConstraints { make in
+            make.width.equalTo(UIScreen.main.bounds.width * 0.8)
         }
         
         oneButton.snp.makeConstraints { make in
