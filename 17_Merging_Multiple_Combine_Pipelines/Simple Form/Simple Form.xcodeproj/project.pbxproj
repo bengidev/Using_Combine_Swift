@@ -20,6 +20,7 @@
 		B6DAF6FC2B4682A300BD072D /* ViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF6F62B4682A300BD072D /* ViewControllerPreview.swift */; };
 		B6DAF6FD2B4682A300BD072D /* NavigationControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF6F72B4682A300BD072D /* NavigationControllerPreview.swift */; };
 		B6DAF6FE2B4682A300BD072D /* PreviewTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF6F82B4682A300BD072D /* PreviewTabBarItem.swift */; };
+		B6DAF7012B46901600BD072D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DAF7002B46901600BD072D /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		B6DAF6F62B4682A300BD072D /* ViewControllerPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPreview.swift; sourceTree = "<group>"; };
 		B6DAF6F72B4682A300BD072D /* NavigationControllerPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerPreview.swift; sourceTree = "<group>"; };
 		B6DAF6F82B4682A300BD072D /* PreviewTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTabBarItem.swift; sourceTree = "<group>"; };
+		B6DAF7002B46901600BD072D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		B6DAF6ED2B4679A600BD072D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B6DAF6FF2B46900300BD072D /* ViewModels */,
 				B6DAF6EE2B4679AD00BD072D /* Views */,
 			);
 			path = Home;
@@ -163,6 +166,14 @@
 				B6DAF6F82B4682A300BD072D /* PreviewTabBarItem.swift */,
 			);
 			path = PreviewView;
+			sourceTree = "<group>";
+		};
+		B6DAF6FF2B46900300BD072D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B6DAF7002B46901600BD072D /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6DAF6DB2B46794100BD072D /* HomeViewController.swift in Sources */,
+				B6DAF7012B46901600BD072D /* HomeViewModel.swift in Sources */,
 				B6DAF6F02B467E7B00BD072D /* HomeView.swift in Sources */,
 				B6DAF6FB2B4682A300BD072D /* TabBarControllerPreview.swift in Sources */,
 				B6DAF6FE2B4682A300BD072D /* PreviewTabBarItem.swift in Sources */,
