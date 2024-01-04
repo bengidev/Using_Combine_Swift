@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Simple Form
 //
 //  Created by Bambang Tri Rahmat Doni on 04/01/24.
@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class HomeViewController: UIViewController {
+    // MARK: Properties
+    private let homeView = HomeView()
 
     // MARK: Initializers
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -44,7 +46,7 @@ final class ViewController: UIViewController {
     private func setupViews() -> Void {
         navigationController?.navigationBar.topItem?.title = "Simple Form"
         
-        view.backgroundColor = .systemGray6
+        view = homeView
     }
 
 }
