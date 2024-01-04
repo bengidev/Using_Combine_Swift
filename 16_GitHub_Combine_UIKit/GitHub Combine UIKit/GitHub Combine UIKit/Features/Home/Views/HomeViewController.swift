@@ -77,16 +77,27 @@ final class HomeViewController: UIViewController {
                 print("startApiNetworkProcess: ", isInProgress)
                 
                 self?.homeView.setIsHiddenActivityIndicator(isInProgress)
-            }
-            
-            homeViewModel.startExtractGithubAPIUserProcess { user in
-                print("startExtractGithubAPIUserProcess: ", user)
-            }
-            
-            homeViewModel.startExtractProfileImageProcess { isInProgress, image in
-                print("startExtractProfileImageProcess: ", isInProgress, String(describing: image))
+                
+                if !isInProgress {
+                    self?.homeViewModel.startExtractGithubAPIUserProcess { user in
+                        print("startExtractGithubAPIUserProcess: ", user)
+                        
+                        self?.updateGithubUserProfile(with: user)
+                    }
+                }
             }
         }
+    }
+    
+    private func updateGithubUserProfile(with user: GithubAPIUser) -> Void {
+        homeView.setProfileImage(with: .init(string: user.avatarURL)!)
+        homeView.setProfileName(with: user.name)
+        homeView.setProfileUsername(with: user.login)
+        homeView.setProfileBio(with: user.bio)
+        homeView.setProfileLocation(with: user.location)
+        homeView.setPublicRepos(with: String(user.publicRepos))
+        homeView.setPublicGists(with: String(user.publicGists))
+        homeView.setContributeSince(with: String(user.since.prefix(4)))
     }
 }
 
