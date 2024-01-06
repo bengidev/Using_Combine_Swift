@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "entwine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tcldr/Entwine.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "72a73955f03b5888199aeccc58067dc365381244"
+      }
+    }
+  ],
+  "version" : 2
+}
